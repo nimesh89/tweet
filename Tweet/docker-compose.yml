@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  tweet:
+    image: tweet
+    build:
+      context: .
+      dockerfile: Tweet\Dockerfile
