@@ -10,40 +10,60 @@ using Tweet.Config;
 using System.Text.Encodings.Web;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace Tweet.Clients
 {
     public class TwitterClient
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        private const string TimeLineUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+        private const string TimeLineUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
         private TwitterAccessToken _token;
 
         public TwitterClient(TwitterAccessToken token)
         {
             _token = token;
-            
+
         }
 
-        public async Task GetTimeLine()
+        public async Task<string> GetTimeLine(string olderFrom, string newerFrom)
         {
+            var builder = new UriBuilder(TimeLineUrl);
             var authorizationParts = GetAuthParts();
-            var parameterString = GetParameterString(authorizationParts);
             var canonicalizedRequestBuilder = new StringBuilder();
             canonicalizedRequestBuilder.Append(HttpMethod.Get.Method);
             canonicalizedRequestBuilder.Append("&");
             canonicalizedRequestBuilder.Append(UrlEncoder.Default.Encode(TimeLineUrl));
             canonicalizedRequestBuilder.Append("&");
+            authorizationParts["count"] = "20";
+            authorizationParts["screen_name"] = _token.ScreenName;
+            builder.Query = $"count=20&screen_name={_token.ScreenName}&" ;
+            if (!string.IsNullOrEmpty(olderFrom))
+            {
+                builder.Query += "max_id=" + olderFrom;
+                authorizationParts["max_id"] = olderFrom;
+            }
+
+            if (!string.IsNullOrEmpty(newerFrom))
+            {
+                builder.Query += (builder.Query.Last() == '&'?string.Empty:"&") + "since_id=" + newerFrom;
+                authorizationParts["since_id"] = newerFrom;
+            }
+
+            var parameterString = GetParameterString(authorizationParts);
             canonicalizedRequestBuilder.Append(UrlEncoder.Default.Encode(parameterString));
             var authHeader = GetAuthHeader(TimeLineUrl, canonicalizedRequestBuilder.ToString(), authorizationParts);
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authHeader);
+            var url = builder.Uri.ToString();
+            var response = await client.GetAsync(url);
 
-            var response = await client.GetAsync(TimeLineUrl);
+            return await response.Content.ReadAsStringAsync();
         }
 
-        private SortedDictionary<string, string> GetAuthParts() {
+        private SortedDictionary<string, string> GetAuthParts()
+        {
             var nonce = Guid.NewGuid().ToString("N");
             var authorizationParts = new SortedDictionary<string, string>
                         {
@@ -57,7 +77,8 @@ namespace Tweet.Clients
             return authorizationParts;
         }
 
-        private string GetParameterString(SortedDictionary<string, string> authorizationParts) {
+        private string GetParameterString(SortedDictionary<string, string> authorizationParts)
+        {
 
             var parameterBuilder = new StringBuilder();
             foreach (var authorizationKey in authorizationParts)

@@ -18,7 +18,8 @@ namespace Tweet.Config
             return new TwitterAccessToken
             {
                 Token = await context.GetTokenAsync(TwitterDefaults.AuthenticationScheme, "access_token"),
-                Secret = await context.GetTokenAsync(TwitterDefaults.AuthenticationScheme, "access_token_secret")
+                Secret = await context.GetTokenAsync(TwitterDefaults.AuthenticationScheme, "access_token_secret"),
+                ScreenName = context.User.Identity.Name
             };
         }
     }

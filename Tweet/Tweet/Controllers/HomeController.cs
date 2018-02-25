@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Twitter;
@@ -32,11 +33,11 @@ namespace Tweet.Controllers
         }
 
         [Authorize()]
-        public async Task<IActionResult> Secure()
+        public async Task<IActionResult> Timeline([FromQuery(Name = "older")]string olderFrom, [FromQuery(Name = "newer")]string newerFrom)
         {
             var client = new TwitterClient(await this.HttpContext.GetTwitterAccessToken());
-            await client.GetTimeLine();
-            return Content("Test");
+            var data = await client.GetTimeLine(olderFrom, newerFrom);
+            return Content(data, "application/javascript");
         }
     }
 }
