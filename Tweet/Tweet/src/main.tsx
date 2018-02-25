@@ -1,4 +1,6 @@
-﻿import * as React from 'react'
+﻿import 'bootstrap';
+import './main.scss'
+import * as React from 'react'
 
 class Main extends React.Component {
     render() {

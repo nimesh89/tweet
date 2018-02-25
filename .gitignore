@@ -287,3 +287,4 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /Tweet/Tweet/wwwroot/bundle.js
+/Tweet/Tweet/wwwroot/styles.css
