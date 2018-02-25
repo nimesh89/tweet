@@ -50,6 +50,7 @@ namespace Tweet.Clients
                 authorizationParts["since_id"] = newerFrom;
             }
 
+            // maintaing alphabaticle order of parameter string is crusial. Otherwise error 32 is thrown from twitter api
             var parameterString = GetParameterString(authorizationParts);
             canonicalizedRequestBuilder.Append(UrlEncoder.Default.Encode(parameterString));
             var authHeader = GetAuthHeader(TimeLineUrl, canonicalizedRequestBuilder.ToString(), authorizationParts);
