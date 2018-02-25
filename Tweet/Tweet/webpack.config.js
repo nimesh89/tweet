@@ -2,9 +2,11 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+var extractScss = new ExtractTextPlugin("styles.css");
+var extractCss = new ExtractTextPlugin("site.css");
 
 let cssTransformerSeq = [{
-    loader: 'css-loader', // translates CSS into CommonJS modules
+    loader: 'css-loader'
 }, {
     loader: 'postcss-loader', // Run post css actions
     options: {
@@ -15,7 +17,7 @@ let cssTransformerSeq = [{
             ];
         }
     }
-}, {
+},  {
     loader: 'sass-loader' // compiles Sass to CSS
 }];
 
@@ -55,12 +57,33 @@ module.exports = {
             },
             {
                 test: /\.(scss)$/,
-                use: ExtractTextPlugin.extract({
+                use: extractScss.extract({
                     fallback: {
                         loader: 'style-loader'
                     },
                     use: cssTransformerSeq
                 })
+            },
+            {
+                test: /\.(css)$/,
+                use: extractCss.extract({
+                    fallback: {
+                        loader: 'style-loader'
+                    },
+                    use: {
+                        loader: 'css-loader'
+                    }
+                })
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: path.resolve(__dirname, 'wwwroot/fonts/')
+                    }
+                }]
             }
         ]
     },
@@ -69,6 +92,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery'
         }),
-        new ExtractTextPlugin("styles.css")
+        extractScss,
+        extractCss
     ]
 };

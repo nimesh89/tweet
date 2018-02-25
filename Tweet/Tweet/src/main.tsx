@@ -1,4 +1,5 @@
-﻿import 'bootstrap';
+﻿import 'bootstrap'
+import './site.css'
 import './main.scss'
 import * as React from 'react'
 
