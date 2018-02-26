@@ -1,1 +1,178 @@
 ﻿$font-family-base: 'Open Sans', sans-serif;
+$font-size-base: 14px;
+$thumb-width: 48px;
+$thumb-height: 48px;
+
+$color-base: #14171a;
+$color-light: #657786;
+$color-link: #2FC2EF;
+
+$max-width-base: 590px;
+
+$thumb-margin: 20px;
+
+$padding: 10px;
+
+// -- layout controls
+body {
+    background-color: #e6ecf0;
+}
+
+.tw-main-wrapper {
+    background-color: #fff;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    font-weight: 400;
+    font-style: normal;
+    color: $color-base;
+    margin: auto;
+    width: 100%;
+    max-width: $max-width-base;
+
+    .tw-block {
+        border: 1px solid rgba(0,0,0,0.1);
+        padding-bottom: 20px;
+
+        .tw-thumb-container {
+            display: block;
+            width: $thumb-width;
+            height: $thumb-height;
+            margin-right: $thumb-margin;
+            margin-left: 10px;
+            margin-top: 10px;
+            float: left;
+
+            img {
+                width: $thumb-width;
+                height: $thumb-height;
+                border-radius: 50%;
+            }
+        }
+
+        .tweet-container {
+            width: 100%;
+            max-width: $max-width-base - $thumb-margin - $thumb-width - $padding - $padding;
+            margin-left: $thumb-width + $thumb-margin;
+            padding: 10px;
+
+            .tw-content {
+            }
+
+            .tw-media {
+                //border: 1px solid rgba(0,0,0,0.1);
+                img {
+                    width: 100%;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+    //-- header controls
+    .tw-header {
+        padding-bottom: 10px;
+
+        h3 {
+            font-size: $font-size-base;
+            display: inline-block;
+            margin-bottom: 0px;
+            font-weight: 700;
+        }
+
+        .username {
+            color: $color-light;
+        }
+
+        .time {
+            color: $color-light;
+
+            a {
+                color: $color-light;
+
+                &:hover {
+                    color: $color-link;
+                }
+            }
+
+            &::before {
+                content: "\00b7";
+            }
+        }
+    }
+
+    .pop-wrapper {
+        .pop-header {
+            height: 95px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .pop-thumb {
+            width: $thumb-width;
+            height: $thumb-height;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            position: absolute;
+            left: 20px;
+            bottom: -20px;
+        }
+
+        .pop-heading {
+            display: block;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .count {
+            font-weight: bold;
+            color: $color-link;
+        }
+
+        .tw-header {
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            h3 {
+            }
+
+            .username {
+                display: block;
+            }
+        }
+    }
+
+    .glyphicon-certificate {
+        color: #1da1f2;
+        margin-left: 5px;
+        position: relative;
+
+        &::before {
+            font-size: 16px;
+        }
+
+        .glyphicon-ok {
+            position: absolute;
+            left: 4px;
+            top: -4px;
+
+            &::before {
+                color: #fff;
+                font-size: 7px;
+            }
+        }
+    }
+    //-- / header controls
+}
+
+
+// -- / layout controls
+
+// -- global controls
+a {
+    color: $color-link;
+}
+
+.clr-bth {
+    clear: both;
+}
+// -- / global controls

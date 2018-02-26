@@ -4,7 +4,6 @@ import * as eventTypes from '../eventNames';
 export function tweetReducer(state = Map({ timeLine: List([]) }), action) {
     switch (action.type) {
         case eventTypes.TIMELINE_RESPONSE_RECIEVED:
-            console.log(action.tweets);
             return state.set("timeLine", List(action.tweets))
         default:
             return state;
