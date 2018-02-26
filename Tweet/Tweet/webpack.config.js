@@ -31,7 +31,7 @@ module.exports = {
     devtool: 'inline-source-map',
     context: path.resolve(__dirname, "src"),
     entry: {
-        common: ['jquery', 'babel-polyfill', 'bootstrap/dist/css/bootstrap.css', 'bootstrap/dist/js/bootstrap'],
+        common: ['jquery', 'babel-polyfill', 'bootstrap/dist/js/bootstrap'],
         main: ['./main.tsx']
     },
     output: {
