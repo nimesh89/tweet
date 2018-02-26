@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\actions\index.ts" />
+    <None Remove="src\actions\tweetActions.ts" />
+    <None Remove="src\eventNames.ts" />
     <None Remove="src\main.tsx" />
     <None Remove="src\reducers\index.ts" />
     <None Remove="src\reducers\tweetReducer.ts" />
@@ -26,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\actions\index.ts" />
+    <TypeScriptCompile Include="src\actions\tweetActions.ts" />
+    <TypeScriptCompile Include="src\eventNames.ts" />
     <TypeScriptCompile Include="src\main.tsx" />
     <TypeScriptCompile Include="src\reducers\index.ts" />
     <TypeScriptCompile Include="src\reducers\tweetReducer.ts" />

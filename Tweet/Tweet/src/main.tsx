@@ -1,4 +1,6 @@
 ﻿import './main.scss';
+import * as es6p from 'es6-promise';
+es6p.polyfill();
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -22,5 +24,7 @@ class Main extends React.Component {
 }
 
 sagaMiddleware.run(tweetSaga);
+
+store.dispatch({ type: "GET_TIMELINE" });
 
 ReactDom.render(<Main></Main>, document.getElementById("react-container"));

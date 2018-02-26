@@ -17,7 +17,7 @@ namespace Tweet.Clients
     public class TwitterClient
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        private const string TimeLineUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+        private const string TimeLineUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json";
         private TwitterAccessToken _token;
 
         public TwitterClient(TwitterAccessToken token)
