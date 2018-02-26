@@ -92,7 +92,7 @@ sagaMiddleware.run(tweetSaga);
 
 store.dispatch(getTweets());
 
-let updater = Observable.interval(3000);
+let updater = Observable.interval(6000);
 updater.subscribe(number => {
     store.dispatch(getTweets());
 });
