@@ -29,18 +29,18 @@ Twitter app key and secret can be changed in
 
 Technologies used
 
-Asp.Net Core
-React
-Redux
-Redux-Saga
+Asp.Net Core,
+React,
+Redux,
+Redux-Saga,
 RxJs
 
 Languages
-C#
-Typescript 2.7
-sass
+C#,
+Typescript 2.7,
+sass,
 
 Tools
 
-Webpack 3
-Docker
+Webpack 3,
+Docker,
