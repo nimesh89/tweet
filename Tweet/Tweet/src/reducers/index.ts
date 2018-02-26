@@ -1,1 +1,1 @@
-﻿export { tweetReducer } from './tweetReducer';
+﻿export * from './tweetReducer';

@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import { tweetReducer } from './reducers'
 import { tweetSaga } from './sagas'
+import { getTweets } from './actions'
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -25,6 +26,6 @@ class Main extends React.Component {
 
 sagaMiddleware.run(tweetSaga);
 
-store.dispatch({ type: "GET_TIMELINE" });
+store.dispatch(getTweets());
 
 ReactDom.render(<Main></Main>, document.getElementById("react-container"));

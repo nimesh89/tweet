@@ -31,7 +31,7 @@ module.exports = {
     devtool: 'inline-source-map',
     context: path.resolve(__dirname, "src"),
     entry: {
-        common: ['babel-polyfill', 'bootstrap'],
+        common: ['jquery', 'babel-polyfill', 'bootstrap/dist/css/bootstrap.css', 'bootstrap/dist/js/bootstrap'],
         main: ['./main.tsx']
     },
     output: {
@@ -79,9 +79,9 @@ module.exports = {
                     fallback: {
                         loader: 'style-loader'
                     },
-                    use: {
+                    use: [{
                         loader: 'css-loader'
-                    }
+                    }]
                 })
             },
             {

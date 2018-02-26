@@ -1,5 +1,6 @@
 ﻿import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { GET_TIMELINE, TIMELINE_RESPONSE_RECIEVED, TIMELINE_REQUEST_FAILED } from "../eventNames";
+import { tweetsRecieved } from "../actions";
 import 'isomorphic-fetch';
 
 function fetchPost() {
@@ -12,7 +13,7 @@ function fetchPost() {
 
 function* fetchTimeLine(action) {
     const posts = yield call(fetchPost);
-    console.log(posts);
+    yield put(tweetsRecieved(posts));
 }
 
 export function* tweetSaga() {
