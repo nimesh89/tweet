@@ -9,6 +9,10 @@
 
   <ItemGroup>
     <None Remove="src\main.tsx" />
+    <None Remove="src\reducers\index.ts" />
+    <None Remove="src\reducers\tweetReducer.ts" />
+    <None Remove="src\sagas\index.ts" />
+    <None Remove="src\sagas\saga.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +27,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="src\main.tsx" />
+    <TypeScriptCompile Include="src\reducers\index.ts" />
+    <TypeScriptCompile Include="src\reducers\tweetReducer.ts" />
+    <TypeScriptCompile Include="src\sagas\index.ts" />
+    <TypeScriptCompile Include="src\sagas\saga.ts" />
   </ItemGroup>
 
 </Project>

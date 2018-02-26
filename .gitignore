@@ -290,3 +290,11 @@ __pycache__/
 /Tweet/Tweet/wwwroot/styles.css
 /Tweet/Tweet/wwwroot/common.js
 /Tweet/Tweet/wwwroot/main.js
+/Tweet/Tweet/src/sagas/saga.js.map
+/Tweet/Tweet/src/sagas/saga.js
+/Tweet/Tweet/src/sagas/index.js.map
+/Tweet/Tweet/src/sagas/index.js
+/Tweet/Tweet/src/reducers/tweetReducer.js.map
+/Tweet/Tweet/src/reducers/tweetReducer.js
+/Tweet/Tweet/src/reducers/index.js.map
+/Tweet/Tweet/src/reducers/index.js
