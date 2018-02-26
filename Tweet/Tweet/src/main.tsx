@@ -47,15 +47,20 @@ class Tweet extends React.Component<{ data }> {
 }
 
 interface ITweetListProps {
-    tweets : List<any>
+    tweets: List<any>,
+    errors: List<any>
 }
 
 class TweetList extends React.Component<ITweetListProps> {
     render() {
-        var tweets = this.props.tweets.map((item) => <Tweet key={item.id_str} data={item} />)
+        var tweets = this.props.tweets.map((item) => <Tweet key={item.id_str} data={item} />);
+        var errors = this.props.errors.map((item) => <div className="alert alert-danger" key={item.id_str} role="alert">
+            {item.message}
+        </div>);
         return (
             <div className="tw-main-wrapper" id="react-container">
-                {tweets}
+                {errors}
+                { tweets }
             </div>);
     }
 }
@@ -64,7 +69,8 @@ const mapStateToProps = (state, ownProps) => {
     if (!state) return;
     let obj = Map(state);
     let props = {
-        tweets: (List(obj.get("timeLine")))
+        tweets: (List(obj.get("timeLine"))),
+        errors: (List(obj.get("errors")))
     }
     return props;
 }
