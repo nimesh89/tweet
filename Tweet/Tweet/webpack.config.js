@@ -5,19 +5,25 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var extractScss = new ExtractTextPlugin("styles.css");
 var extractCss = new ExtractTextPlugin("site.css");
 
+//let cssTransformerSeq = [{
+//    loader: 'css-loader'
+//}, {
+//    loader: 'postcss-loader', // Run post css actions
+//    options: {
+//        plugins: function () { // post css plugins, can be exported to postcss.config.js
+//            return [
+//                require('precss'),
+//                require('autoprefixer')
+//            ];
+//        }
+//    }
+//}, {
+//    loader: 'sass-loader' // compiles Sass to CSS
+//}];
+
 let cssTransformerSeq = [{
     loader: 'css-loader'
 }, {
-    loader: 'postcss-loader', // Run post css actions
-    options: {
-        plugins: function () { // post css plugins, can be exported to postcss.config.js
-            return [
-                require('precss'),
-                require('autoprefixer')
-            ];
-        }
-    }
-},  {
     loader: 'sass-loader' // compiles Sass to CSS
 }];
 
@@ -87,6 +93,19 @@ module.exports = {
                         outputPath: path.resolve(__dirname, 'wwwroot/fonts/')
                     }
                 }]
+            },
+            {
+                test: /\.less$/,
+                use: extractScss.extract({
+                    fallback: {
+                        loader: 'style-loader'
+                    },
+                    use: [{
+                        loader: "css-loader" // translates CSS into CommonJS
+                    }, {
+                        loader: "less-loader" // compiles Less to CSS
+                    }]
+                })
             }
         ]
     },
