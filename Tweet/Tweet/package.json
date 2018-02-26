@@ -32,7 +32,11 @@
     "css-loader": "^0.28.10",
     "node-sass": "^4.7.2",
     "precss": "^3.1.1",
-    "file-loader": "^1.1.9",
-    "resolve-url-loader": "^2.2.1"
+    "file-loader": "^1.1.9"
+  },
+  "-vs-binding": {
+    "BeforeBuild": [
+      "build"
+    ]
   }
 }

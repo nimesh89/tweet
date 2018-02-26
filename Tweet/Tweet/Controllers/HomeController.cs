@@ -17,19 +17,10 @@ namespace Tweet.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
+        [Authorize()]
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Login()
-        {
-            return Challenge(new AuthenticationProperties() {  RedirectUri = "/Home/Token" }, TwitterDefaults.AuthenticationScheme);
-        }
-
-        public IActionResult Token()
-        {
-            return Content("Test");
         }
 
         [Authorize()]
