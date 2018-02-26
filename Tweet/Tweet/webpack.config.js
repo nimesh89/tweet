@@ -24,10 +24,13 @@ let cssTransformerSeq = [{
 module.exports = {
     devtool: 'inline-source-map',
     context: path.resolve(__dirname, "src"),
-    entry: ['babel-polyfill', './main.tsx'],
+    entry: {
+        common: ['babel-polyfill', 'bootstrap'],
+        main: ['./main.tsx']
+    },
     output: {
         path: path.resolve(__dirname, 'wwwroot'),
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.

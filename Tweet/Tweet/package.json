@@ -12,7 +12,8 @@
     "popper.js": "^1.12.9",
     "redux": "^3.7.2",
     "immutable": "^3.8.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "webpack": "^3.11.0",
@@ -23,7 +24,6 @@
     "ts-loader": "^3.5.0",
     "typescript": "^2.7.2",
     "babel-preset-react": "^6.24.1",
-    "@types/react": "^16.0.38",
     "sass-loader": "^6.0.6",
     "postcss-loader": "^2.1.0",
     "autoprefix": "^1.0.1",
@@ -32,7 +32,9 @@
     "css-loader": "^0.28.10",
     "node-sass": "^4.7.2",
     "precss": "^3.1.1",
-    "file-loader": "^1.1.9"
+    "file-loader": "^1.1.9",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4"
   },
   "-vs-binding": {
     "BeforeBuild": [
