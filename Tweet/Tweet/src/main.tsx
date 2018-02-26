@@ -11,6 +11,7 @@ import { tweetReducer } from './reducers'
 import { tweetSaga } from './sagas'
 import { getTweets } from './actions'
 import { Map, List } from 'immutable';
+import { Observable } from 'rxjs';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -25,21 +26,20 @@ class Tweet extends React.Component<{ data }> {
         return (
             <div className="tw-block">
                 <a href="#" className="tw-thumb-container">
-                    <img src="https://pbs.twimg.com/profile_images/941796662770651137/cDtLVz1j_bigger.jpg" />
+                    <img src={this.props.data.user.profile_image_url_https} />
                 </a>
                 <div className="tweet-container">
                     <div className="tw-header">
-                        <h3 className="tw-heading">Mashable</h3>
-                        <span className="glyphicon glyphicon-certificate"><span className="glyphicon glyphicon-ok"></span></span>
-                        <span className="username u-dir u-textTruncate" data-toggle="popover" data-placement="bottom">@<span>olympicchannel</span></span>
-                        <small className="time">
-                            <a href="/olympicchannel/status/965906708336914432" className="tweet-timestamp js-permalink js-nav js-tooltip" title="3:11 AM - 20 Feb 2018" data-send-impression-cookie="" data-conversation-id="965906708336914432"><span className="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1519125079" data-time-ms="1519125079000" data-long-form="true">Feb 20</span></a>
-                        </small>
+                        <h3 className="tw-heading">{this.props.data.user.name}</h3>
+                        {this.props.data.verified && <span className="glyphicon glyphicon-certificate"><span className="glyphicon glyphicon-ok"></span></span>}
+                        <span className="username u-dir u-textTruncate" data-toggle="popover" data-placement="bottom">@<span>{this.props.data.user.screen_name}</span></span>
                     </div>
                     <p className="tw-content">
-                        Rhythm Shoes can track steps via motion sensors and provide haptic feedback to help users learn choreography.
+                        {this.props.data.text}
                         </p>
-                    <div className="tw-media"><img data-aria-label-part="" src="https://pbs.twimg.com/media/DW77nOKVoAIKS3Y.jpg" alt="" /></div>
+                    {this.props.data.entities.media
+                        && this.props.data.entities.media.length > 0
+                        && <div className="tw-media"><img data-aria-label-part="" src={this.props.data.entities.media[0].media_url_https} alt="" /></div>}
                 </div>
                 <div className="clr-bth"></div>
             </div>);
@@ -85,5 +85,10 @@ class Main extends React.Component {
 sagaMiddleware.run(tweetSaga);
 
 store.dispatch(getTweets());
+
+let updater = Observable.interval(3000);
+updater.subscribe(number => {
+    store.dispatch(getTweets());
+});
 
 ReactDom.render(<Main></Main>, document.getElementById("react-container"));
