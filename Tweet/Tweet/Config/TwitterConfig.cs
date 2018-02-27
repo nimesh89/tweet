@@ -10,8 +10,8 @@ namespace Tweet.Config
 {
     public static class TwitterConfig
     {
-        public const string TwitterConsumerKey = "a6p1KptmSRM7b5B1ZmP0amtsY";
-        public const string TwitterConsumerSecret = "6SfpTl1ntkDc6IQH7LAXTw1gICNO8t1juQFpz56oXo1sYP2eBr";
+        public const string TwitterConsumerKey = "1LuonNmODD3RxXFq5CAOEyXiy";
+        public const string TwitterConsumerSecret = "j5tp3tg2zmYRChxrDOdMVwY6wqLkFx79VlVYuHP2fX2KakaH94";
 
         public static async Task<TwitterAccessToken> GetTwitterAccessToken(this HttpContext context)
         {

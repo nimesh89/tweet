@@ -53,8 +53,8 @@ interface ITweetListProps {
 
 class TweetList extends React.Component<ITweetListProps> {
     render() {
-        var tweets = this.props.tweets.map((item) => <Tweet key={item.id_str} data={item} />);
-        var errors = this.props.errors.map((item) => <div className="alert alert-danger" key={item.id_str} role="alert">
+        var tweets = this.props.tweets.map((item) => <Tweet key={item.id} data={item} />);
+        var errors = this.props.errors.map((item) => <div className="alert alert-danger" key={item.code} role="alert">
             {item.message}
         </div>);
         return (
@@ -92,7 +92,7 @@ sagaMiddleware.run(tweetSaga);
 
 store.dispatch(getTweets(null));
 
-let updater = Observable.interval(6000);
+let updater = Observable.interval(30000);
 updater.subscribe(number => {
     var state = store.getState()
     var max = state.get("tweetlatest");
