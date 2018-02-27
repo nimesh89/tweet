@@ -3,8 +3,8 @@ import { GET_TIMELINE, TIMELINE_RESPONSE_RECIEVED, TIMELINE_REQUEST_FAILED } fro
 import { tweetsRecieved } from "../actions";
 import 'isomorphic-fetch';
 
-function fetchPost() {
-    return fetch(`${window.location.protocol}//${window.location.host}/Home/TimeLine`, {
+function fetchPost(latest: number) {
+    return fetch((`${window.location.protocol}//${window.location.host}/Home/TimeLine` + ((latest != null || latest > 0) ? `?newer=${latest}` : '')), {
         credentials: "same-origin"
     })
         .then(resp => resp.json())
@@ -12,7 +12,7 @@ function fetchPost() {
 }
 
 function* fetchTimeLine(action) {
-    const posts = yield call(fetchPost);
+    const posts = yield call(fetchPost, action.latest);
     yield put(tweetsRecieved(posts));
 }
 

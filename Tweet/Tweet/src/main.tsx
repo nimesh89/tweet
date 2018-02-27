@@ -31,7 +31,7 @@ class Tweet extends React.Component<{ data }> {
                 <div className="tweet-container">
                     <div className="tw-header">
                         <h3 className="tw-heading">{this.props.data.user.name}</h3>
-                        {this.props.data.verified && <span className="glyphicon glyphicon-certificate"><span className="glyphicon glyphicon-ok"></span></span>}
+                        {this.props.data.user.verified && <span className="glyphicon glyphicon-certificate"><span className="glyphicon glyphicon-ok"></span></span>}
                         <span className="username u-dir u-textTruncate" data-toggle="popover" data-placement="bottom">@<span>{this.props.data.user.screen_name}</span></span>
                     </div>
                     <p className="tw-content">
@@ -90,11 +90,13 @@ class Main extends React.Component {
 
 sagaMiddleware.run(tweetSaga);
 
-store.dispatch(getTweets());
+store.dispatch(getTweets(null));
 
 let updater = Observable.interval(6000);
 updater.subscribe(number => {
-    store.dispatch(getTweets());
+    var state = store.getState()
+    var max = state.get("tweetlatest");
+    store.dispatch(getTweets(max));
 });
 
 ReactDom.render(<Main></Main>, document.getElementById("react-container"));
